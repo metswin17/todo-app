@@ -1,8 +1,11 @@
 import Todo from './Components/Todo';
+import { SettingsProvider } from './Context/SettingsContext';
 
 function App() {
   return (
-    <Todo />
+    <SettingsProvider>
+      <Todo />
+    </SettingsProvider>
   );
 }
 
