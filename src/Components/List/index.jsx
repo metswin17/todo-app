@@ -1,6 +1,6 @@
 
 import { useContext, useState } from 'react';
-import { Pagination } from '@mantine/core';
+import { Pagination, Card, Button } from '@mantine/core';
 import { SettingsContext } from '../../Context/SettingsContext';
 
 function List({ list, toggleComplete }) {
@@ -26,17 +26,21 @@ function List({ list, toggleComplete }) {
   return (
     <section>
       {displayedItems.map(item => (
-        <div key={item.id}>
+        <Card key={item.id} shadow="sm" padding="lg" radius="md" withBorder mb="md" maw={500}>
           <p>{item.text}</p>
           <p>Assigned to: {item.assignee}</p>
           <p>Difficulty: {item.difficulty}</p>
 
-          <button type="button" onClick={() => toggleComplete(item.id)}>
-            Complete: {item.complete.toString()}
-          </button>
+          <Button
+  type="button"
+  variant="light"
+  color={item.complete ? 'green' : 'blue'}
+  onClick={() => toggleComplete(item.id)}
+>
+  Complete: {item.complete.toString()}
+</Button>
 
-          <hr />
-        </div>
+          </Card>
       ))}
 
       {totalPages > 1 && (
