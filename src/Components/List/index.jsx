@@ -4,7 +4,7 @@ import { Pagination, Card, Button } from '@mantine/core';
 import { SettingsContext } from '../../Context/SettingsContext';
 
 function List({ list, toggleComplete }) {
-  const { hideCompleted, itemsPerPage } = useContext(SettingsContext);
+  const { hideCompleted, itemsPerPage, sortWord } = useContext(SettingsContext);
 
   const [activePage, setActivePage] = useState(1);
 
@@ -12,13 +12,20 @@ function List({ list, toggleComplete }) {
     ? list.filter(item => !item.complete)
     : list;
 
-  const totalPages = Math.ceil(visibleItems.length / itemsPerPage);
+    const sortedItems = [...visibleItems].sort((a, b) => {
+      if (sortWord === 'difficulty') {
+        return Number(a.difficulty) - Number(b.difficulty);
+      }
+      return 0;
+    });
+
+    const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
 
   const currentPage = Math.min(activePage, Math.max(totalPages, 1));
 
   const startIndex = (currentPage - 1) * itemsPerPage;
 
-  const displayedItems = visibleItems.slice(
+  const displayedItems = sortedItems.slice(
     startIndex,
     startIndex + itemsPerPage
   );
