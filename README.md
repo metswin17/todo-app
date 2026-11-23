@@ -71,3 +71,41 @@ debugging, explaining React concepts, and helping create
 a Context settings test.
 
 The application was tested and verified locally.
+
+
+## CodeSandbox
+
+[View Todo App in CodeSandbox](https://codesandbox.io/p/sandbox/jg3dkz)
+
+[View Live Todo App](https://jg3dkz.csb.app/)
+
+
+## Global State Management
+
+This application uses the React Context API to share settings
+between components without passing them through props.
+
+The SettingsProvider manages three default settings:
+
+- itemsPerPage: 3
+- hideCompleted: true
+- sortWord: difficulty
+
+The List component uses useContext(SettingsContext) to access
+these settings.
+
+The settings control pagination, hide completed tasks,
+and sort tasks by difficulty.
+
+## Custom useForm Hook
+
+The application uses a custom `useForm` hook located in `src/hooks/form.js`.
+
+The hook manages form input values and handles form submissions.
+
+- `useState` stores the current form values.
+- `handleChange` updates values when a user enters information or adjusts the difficulty slider.
+- `handleSubmit` prevents the browser from refreshing and passes the form data to the `addItem` function.
+- `useEffect` initializes the form with default values.
+
+The Todo component uses this hook to collect task details and add new tasks to the list.
